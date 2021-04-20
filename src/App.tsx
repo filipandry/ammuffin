@@ -5,11 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { theme } from "./contexts/theme";
 import { Provider } from "react-redux";
 
-import { createBrowserHistory } from "history";
-import { configureStore } from "./store/configureStore";
-
-const history = createBrowserHistory();
-const store = configureStore(history);
+import { store } from "./store/configureStore";
 
 export default function App() {
   return (

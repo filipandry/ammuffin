@@ -1,42 +1,17 @@
 import { IProduct } from "../models";
-import { RequestProductsList, RequestProduct } from "./Requests";
-import { ReceiveProductsList, ReceiveProduct } from "./Responses";
-import { AppThunkAction } from "./";
-import { Reducer, Action } from "redux";
+import {
+  createSlice,
+  createAsyncThunk,
+  combineReducers
+} from "@reduxjs/toolkit";
 import { Data } from "../data/SampleData";
 
-type KnownAction =
-  | RequestProductsList
-  | RequestProduct
-  | ReceiveProductsList
-  | ReceiveProduct;
 export interface StoreState {
   products?: IProduct[] | null;
   product?: IProduct | null;
   productsLoading?: boolean;
   productLoading?: boolean;
 }
-
-export const actionsCreator = {
-  requestProductsList: (): AppThunkAction<KnownAction> => (
-    dispatch,
-    getState
-  ) => {
-    Data.getProducts().then((res) => {
-      dispatch({ type: "RECEIVE_PRODUCTS_LIST", products: res });
-    });
-    dispatch({ type: "REQUEST_PRODUCTS_LIST" });
-  },
-  requestProduct: (id: number): AppThunkAction<KnownAction> => (
-    dispatch,
-    getState
-  ) => {
-    Data.getProduct(id).then((res) =>
-      dispatch({ type: "RECEIVE_PRODUCT", product: res })
-    );
-    dispatch({ type: "REQUEST_PRODUCT", id: id });
-  }
-};
 
 const defaultState: StoreState = {
   products: null,
@@ -45,23 +20,36 @@ const defaultState: StoreState = {
   productLoading: false
 };
 
-export const reducer: Reducer<StoreState> = (
-  state: StoreState | undefined,
-  incomingAction: Action
-): StoreState => {
-  if (state === undefined) {
-    return defaultState;
+export const requestProductsList = createAsyncThunk(
+  "REQUEST_PRODUCTS_LIST",
+  async (_, thunkApi) => {
+    return await Data.getProducts();
   }
-  const action: KnownAction = incomingAction as KnownAction;
-  switch (action.type) {
-    case "REQUEST_PRODUCTS_LIST":
-      return { ...state, productsLoading: true };
-    case "REQUEST_PRODUCT":
-      return { ...state, productLoading: true };
-    case "RECEIVE_PRODUCTS_LIST":
-      return { ...state, productsLoading: false, products: action.products };
-    case "RECEIVE_PRODUCT":
-      return { ...state, productLoading: false, product: action.product };
+);
+export const requestProduct = createAsyncThunk(
+  "REQUEST_PRODUCT",
+  async (id: number, thunkApi) => {
+    return await Data.getProduct(id);
   }
-  return state;
-};
+);
+
+const storeSlice = createSlice({
+  name: "STORE",
+  initialState: defaultState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(requestProductsList.fulfilled, (state, action) => {
+        return { ...state, productsLoading: false, products: action.payload };
+      })
+      .addCase(requestProduct.fulfilled, (state, action) => {
+        return { ...state, productLoading: false, product: action.payload };
+      });
+  }
+});
+
+const reducer = combineReducers({
+  store: storeSlice.reducer
+});
+
+export default reducer;
