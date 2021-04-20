@@ -14,7 +14,7 @@ const Main = (props: IProps) => {
 
   return (
     <div className={classes.root}>
-      {/* <Header bigger={!trigger} /> */}
+      <Header bigger={!trigger} />
       <div className={classes.content}>
         <Switch>
           {Routes.map((item) => (

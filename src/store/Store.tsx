@@ -52,7 +52,7 @@ export const reducer: Reducer<StoreState> = (
   if (state === undefined) {
     return defaultState;
   }
-  const action = incomingAction as KnownAction;
+  const action: KnownAction = incomingAction as KnownAction;
   switch (action.type) {
     case "REQUEST_PRODUCTS_LIST":
       return { ...state, productsLoading: true };

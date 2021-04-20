@@ -22,8 +22,9 @@ const Component = (props: IProps) => {
     </Grid>
   );
 };
-const ProductsBox = connect(
+const connector = connect(
   (state: ApplicationState) => state.store,
   Store.actionsCreator
-)(Component as any);
+);
+const ProductsBox = connector(Component);
 export { ProductsBox };
