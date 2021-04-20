@@ -4,7 +4,7 @@ import { IProps } from "./Interface";
 import { Grid, IconButton } from "@material-ui/core";
 import { SliderItem, SliderIndicator } from "../index";
 
-const Slider = (props: IProps) => {
+export const Slider = (props: IProps) => {
   const classes = useStyles(props);
   const [currentItem, setCurrentItem] = useState<number>(0);
 
@@ -61,5 +61,3 @@ const Slider = (props: IProps) => {
     </Grid>
   );
 };
-
-export { Slider };

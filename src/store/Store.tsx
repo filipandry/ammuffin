@@ -26,6 +26,12 @@ export const requestProductsList = createAsyncThunk(
     return await Data.getProducts();
   }
 );
+export const requestTopProductsList = createAsyncThunk(
+  "REQUEST_TOP_PRODUCTS_LIST",
+  async (top: number, thunkApi) => {
+    return await Data.getTopSellProducts(top);
+  }
+);
 export const requestProduct = createAsyncThunk(
   "REQUEST_PRODUCT",
   async (id: number, thunkApi) => {
@@ -40,6 +46,9 @@ const storeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(requestProductsList.fulfilled, (state, action) => {
+        return { ...state, productsLoading: false, products: action.payload };
+      })
+      .addCase(requestTopProductsList.fulfilled, (state, action) => {
         return { ...state, productsLoading: false, products: action.payload };
       })
       .addCase(requestProduct.fulfilled, (state, action) => {

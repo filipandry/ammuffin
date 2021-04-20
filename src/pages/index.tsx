@@ -1,3 +1,3 @@
-import { routes as Routes } from "./Routes";
+import { routes } from "./Routes";
 
-export { Routes };
+export const Routes = routes;

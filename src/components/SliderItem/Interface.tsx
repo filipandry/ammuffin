@@ -1,5 +1,3 @@
-interface IProps {
+export interface IProps {
   item: string;
 }
-
-export { IProps };

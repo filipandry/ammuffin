@@ -1,7 +1,7 @@
 import { IProps } from "./Interface";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   "@global": {
     body: {
       margin: 0,
@@ -18,5 +18,3 @@ const useStyles = makeStyles((theme: Theme) => ({
     //offset: 80
   }
 }));
-
-export { useStyles };

@@ -5,7 +5,7 @@ import { Routes } from "../../pages";
 import { Switch, Route } from "react-router-dom";
 import { useScrollTrigger } from "@material-ui/core";
 
-const Main = (props: IProps) => {
+export const Main = (props: IProps) => {
   const classes = useStyles(props);
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -28,5 +28,3 @@ const Main = (props: IProps) => {
     </div>
   );
 };
-
-export { Main };

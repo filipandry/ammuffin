@@ -1,7 +1,7 @@
 import { Home } from "./Home";
 import { E404 } from "./E404";
 
-const routes = [
+export const routes = [
   {
     id: "home",
     path: "/",
@@ -15,5 +15,3 @@ const routes = [
     component: E404
   }
 ];
-
-export { routes };

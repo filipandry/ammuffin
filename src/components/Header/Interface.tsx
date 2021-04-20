@@ -1,5 +1,3 @@
-interface IProps {
+export interface IProps {
   bigger: boolean;
 }
-
-export { IProps };

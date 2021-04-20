@@ -3,7 +3,7 @@ import { IProps } from "./Interface";
 import { AppBar, Toolbar } from "@material-ui/core";
 import Logo from "../../assets/images/LOGO.png";
 
-const Header = (props: IProps) => {
+export const Header = (props: IProps) => {
   const classes = useStyles(props);
   return (
     <>
@@ -20,5 +20,3 @@ const Header = (props: IProps) => {
     </>
   );
 };
-
-export { Header };

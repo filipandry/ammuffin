@@ -2,7 +2,7 @@ import { useStyles } from "./Style";
 import { IProps } from "./Interface";
 import classNames from "classnames";
 
-const SliderIndicator = (props: IProps) => {
+export const SliderIndicator = (props: IProps) => {
   const classes = useStyles(props);
   return (
     <div className={classes.root}>
@@ -18,5 +18,3 @@ const SliderIndicator = (props: IProps) => {
     </div>
   );
 };
-
-export { SliderIndicator };

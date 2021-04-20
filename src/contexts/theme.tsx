@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 // A custom theme for this app
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#C80000"
@@ -25,5 +25,3 @@ const theme = createMuiTheme({
     MuiPaper: {}
   }
 });
-
-export { theme };

@@ -3,18 +3,25 @@ import { useStyles } from "./Style";
 import { IProps } from "./Interface";
 import { Grid } from "@material-ui/core";
 import { ProductItem } from "../index";
-import { ApplicationState, Store } from "../../../store";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { ApplicationState } from "../../../store";
+import { requestTopProductsList } from "../../../store/Store";
 
-const Component = (props: IProps) => {
+export const ProductsBox = (props: IProps) => {
   const classes = useStyles(props);
+
+  const { products, productsLoading } = useSelector(
+    (state: ApplicationState) => state.store
+  );
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    props.requestProductsList();
+    dispatch(requestTopProductsList(8));
   }, []);
   return (
     <Grid container spacing={2} className={classes.root}>
-      {!props.productsLoading &&
-        props.products?.map((item, index) => (
+      {!productsLoading &&
+        products?.map((item, index) => (
           <Grid item xs={6} md={3} key={index}>
             <ProductItem item={item} />
           </Grid>
@@ -22,9 +29,3 @@ const Component = (props: IProps) => {
     </Grid>
   );
 };
-const connector = connect(
-  (state: ApplicationState) => state.store,
-  Store.actionsCreator
-);
-const ProductsBox = connector(Component);
-export { ProductsBox };

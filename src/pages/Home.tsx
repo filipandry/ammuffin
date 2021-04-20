@@ -1,6 +1,6 @@
 import { Slider, ProductsBox } from "../components";
 
-const Home = (props: any) => {
+export const Home = (props: any) => {
   return (
     <div>
       <Slider
@@ -14,5 +14,3 @@ const Home = (props: any) => {
     </div>
   );
 };
-
-export { Home };
